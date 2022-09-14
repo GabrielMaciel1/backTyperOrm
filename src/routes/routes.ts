@@ -4,6 +4,9 @@ import { ColumnController } from '../controller/ColumnController'
 
 const routes = Router()
 
-routes.post('/card', new CardController().create )
+routes.post('/card', new CardController().createCard )
 routes.post('/column', new ColumnController().create)
+routes.get('/card', new CardController().getCards)
+routes.get("/card/:id", new CardController().getCard);
+routes.put("/card/:id", new CardController().updateCard)
 export default routes;

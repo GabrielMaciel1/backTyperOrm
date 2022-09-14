@@ -2,25 +2,37 @@ import {
   Entity,
   Column,
   CreateDateColumn,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   ManyToOne,
   JoinColumn,
+  JoinTable,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Columns } from "./Column";
 
 @Entity("card")
 export class Card {
-  @PrimaryGeneratedColumn("increment")
+  @PrimaryColumn("uuid")
   id: string;
+
 
   @Column()
   name: string;
 
 
-  @ManyToOne(() => Columns)
-  @JoinColumn({ name: "column_id" })
-  columns: string;
+  @ManyToOne(() => Columns, columns => columns.card)
+  @JoinTable({ 
+    name: "column_card",
+    joinColumn:{
+      name: 'columns_id',
+      referencedColumnName:"id"
+    },
+    inverseJoinColumn:{
+      name:"card_id",
+      referencedColumnName: 'id'
+    }
+  })
+  columns: Columns[];
 
   @CreateDateColumn()
   created_at: Date;

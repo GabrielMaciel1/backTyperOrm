@@ -1,6 +1,6 @@
 
-import {Columns} from '../entities/Column'
-import { Card } from './../entities/Card';
+import {Columns} from './entities/Column'
+import { Card } from './entities/Card';
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 
@@ -12,8 +12,9 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "1234",
     database: "postgres",
+    //synchronize: true,
     entities: [Card, Columns],
-    migrations: ['src/migrations/**/*{.ts,.js}'],
+    migrations: ['**/migrations/*{.ts,.js}'],
 })
 
 AppDataSource.initialize()

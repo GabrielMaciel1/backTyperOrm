@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import routes from '../src/routes/routes'
-import AppDataSource  from './database/DataSource'
+import AppDataSource  from './DataSource'
 import express from "express"
 
 
