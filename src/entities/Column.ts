@@ -7,9 +7,6 @@ export class Columns {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
- 
-  @PrimaryColumn()
-  boardId: string;
 
   @Column()
   name: string;
