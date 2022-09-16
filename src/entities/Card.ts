@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
   JoinTable,
@@ -12,7 +13,7 @@ import { Columns } from "./Column";
 
 @Entity("card")
 export class Card {
-  @PrimaryColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
 
@@ -32,7 +33,7 @@ export class Card {
       referencedColumnName: 'id'
     }
   })
-  columns: Columns[];
+  columns: Columns;
 
   @CreateDateColumn()
   created_at: Date;

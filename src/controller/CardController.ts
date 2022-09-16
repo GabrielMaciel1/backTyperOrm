@@ -25,14 +25,14 @@ export class CardController{
     
     
     async createCard(req: Request, res: Response){
-        const{name, columns}= req.body
+        const{name}= req.body
 
         if(!name){
-            return res.status(400).json({message:'sei la'})
+            return res.status(400).json({message:'error'})
         }
 
         try {
-            const newCard = cardRepository.create({ name,columns })
+            const newCard = cardRepository.create({ name})
 
 			await cardRepository.save(newCard)
               console.log(newCard)
@@ -43,18 +43,41 @@ export class CardController{
         }
     }
     async updateCard(req: Request, res:Response){
-        const {id, name}= req.params
+        const {id}= req.params
+        const {name}= req.body
+        
 
         try {
-            const card = await cardRepository.findOneBy({ id: String (id) });
-            if (!card) return res.status(404).json({ message: "Not user found" });
-        
-            await cardRepository.update({ name: (name) }, req.body);
-        
-            return res.sendStatus(204);
+            const card = await cardRepository.findOneBy({ id: id });
+
+            if (!card){
+                return res.status(404).json({ message: "Not user found" });
+            } 
+            
+            card.name = name ? name : card.name
+            cardRepository.update( name , req.body);
+            const results = await cardRepository.save(card)
+            
+            return res.send(results);
         } catch (error) {
             
+            return res.status(500).json({message:"erro interno"}) 
         }
     }
-    
+
+        async deleteCard (req: Request, res: Response) {
+        const { id } = req.params;
+        try {
+          const result = await cardRepository.delete({ id: id });
+      
+          if (result.affected === 0)
+            return res.status(404).json({ message: "User not found" });
+      
+          return res.sendStatus(204);
+        } catch (error) {
+          if (error instanceof Error) {
+            return res.status(500).json({ message: error.message });
+          }
+        }
+    }
 }
