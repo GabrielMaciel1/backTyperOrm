@@ -2,9 +2,11 @@ import { Request, Response } from "express";
 import { columnRepository } from "../repositories/columnRepository";
 
 
+
 export class ColumnController{
     
     async getColumns(req:Request, res: Response){
+        const {id, columnsId}= req.params
         try {
             const columns= await columnRepository.find()
             return res.json(columns)

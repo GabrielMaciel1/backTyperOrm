@@ -11,7 +11,7 @@ export class Columns {
   @Column()
   name: string;
 
-  @OneToMany(()=> Card, (card) => card.columns)
+  @OneToMany(type => Card, columns => Columns)
   card: Card[];
 
   @CreateDateColumn()

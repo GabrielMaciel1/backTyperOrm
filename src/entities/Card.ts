@@ -21,18 +21,7 @@ export class Card {
   name: string;
 
 
-  @ManyToOne(() => Columns, columns => columns.card)
-  @JoinTable({ 
-    name: "column_card",
-    joinColumn:{
-      name: 'columns_id',
-      referencedColumnName:"id"
-    },
-    inverseJoinColumn:{
-      name:"card_id",
-      referencedColumnName: 'id'
-    }
-  })
+  @ManyToOne(type => Columns, card => Card, {eager: true})
   columns: Columns;
 
   @CreateDateColumn()

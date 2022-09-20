@@ -1,11 +1,13 @@
 //import { Columns } from './../entities/Column';
 import { Request, Response } from "express";
 import { cardRepository } from "../repositories/cardRepository";
+import { columnRepository } from "../repositories/columnRepository";
 
 
 export class CardController{
     
     async getCards(req:Request, res: Response){
+        const { columnId } = req.params;
         try {
             const cards= await cardRepository.find()
             return res.json(cards)
@@ -25,15 +27,17 @@ export class CardController{
     
     
     async createCard(req: Request, res: Response){
-        const{name}= req.body
+        const{name, columnsId}= req.body
+        
 
         if(!name){
             return res.status(400).json({message:'error'})
         }
 
         try {
-            const newCard = cardRepository.create({ name})
-
+           
+            const newCard = cardRepository.create( {name, columns: columnsId})
+            
 			await cardRepository.save(newCard)
               console.log(newCard)
 			return res.status(201).json(newCard)

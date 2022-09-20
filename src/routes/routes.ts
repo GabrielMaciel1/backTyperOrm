@@ -18,6 +18,6 @@ routes.get("/card/:id", new CardController().getCard);
 routes.put("/card/:id", new CardController().updateCard)
 routes.put('/columns/:id', new ColumnController().updateColumn)
 
-routes.delete("/card/:id", new CardController().deleteCard)
+routes.delete("/card/:id", new CardController().deleteCard) 
 routes.delete('/columns/:id', new ColumnController().deleteColumn)
 export default routes;
