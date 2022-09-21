@@ -9,11 +9,19 @@ export class ColumnController{
         const {id, columnsId}= req.params
         try {
             const columns= await columnRepository.find()
+            // columns.map( (value)=>{
+            //     console.log(value.card);
+            // }
+            // )
             return res.json(columns)
+           
+          
+            
         } catch (error) {
             return res.status(500).json({ message: "erro interno" });
         }
     }
+
     async getColumn(req:Request, res: Response){
         try {
             const { id } = req.params;
@@ -67,7 +75,7 @@ export class ColumnController{
     }
 
         async deleteColumn (req: Request, res: Response) {
-        const { id } = req.params;
+        const { id, card } = req.params;
         try {
           const result = await columnRepository.delete({ id: id });
       

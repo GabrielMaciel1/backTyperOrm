@@ -20,6 +20,8 @@ export class CardController{
             const { id } = req.params;
             const card= await cardRepository.findOneBy({ id:(id) })
             return res.json(card)
+        
+            
         } catch (error) {
             return res.status(500).json({ message: "erro interno" });
         }
