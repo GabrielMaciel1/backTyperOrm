@@ -59,12 +59,10 @@ export class ColumnController{
         try {
             const column = await columnRepository.findOneBy({ id: id });
 
-            if (!column){
-                return res.status(404).json({ message: "Not user found" });
-            } 
+          
             
             column.name = name ? name : column.name
-            columnRepository.update( name , req.body);
+            columnRepository.update( {name: name} , req.body);
             const results = await columnRepository.save(column)
             
             return res.send(results);

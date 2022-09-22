@@ -56,12 +56,10 @@ export class CardController{
         try {
             const card = await cardRepository.findOneBy({ id: id });
 
-            if (!card){
-                return res.status(404).json({ message: "Not user found" });
-            } 
+            
             
             card.name = name ? name : card.name
-            cardRepository.update( name , req.body);
+            cardRepository.update({name: name}, req.body);
             const results = await cardRepository.save(card)
             
             return res.send(results);
