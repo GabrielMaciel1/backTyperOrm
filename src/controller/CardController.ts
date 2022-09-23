@@ -69,6 +69,27 @@ export class CardController{
         }
     }
 
+    async updateCardColumnId(req: Request, res:Response){
+        const {id}= req.params
+        const {columns}= req.body
+        
+
+        try {
+            const card = await cardRepository.findOneBy({ id: id });
+
+            
+            
+            
+            cardRepository.update({columns: columns}, req.body);
+            const results = await cardRepository.save(card)
+            
+            return res.send(results);
+        } catch (error) {
+            
+            return res.status(500).json({message:"erro interno"}) 
+        }
+    }
+    
         async deleteCard (req: Request, res: Response) {
         const { id } = req.params;
         try {

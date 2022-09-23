@@ -21,7 +21,11 @@ export class Card {
   name: string;
 
 
-  @ManyToOne(type => Columns, card => Card, {eager: true})
+  @ManyToOne(type => Columns, card => Card, {
+    eager: true,
+    onDelete: "CASCADE"
+  
+  })
   columns: Columns;
 
   @CreateDateColumn()

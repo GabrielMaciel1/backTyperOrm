@@ -16,6 +16,7 @@ routes.get('/card', new CardController().getCards)
 routes.get("/card/:id", new CardController().getCard);
 
 routes.put("/card/:id", new CardController().updateCard)
+routes.put("/card/:id"), new CardController().updateCardColumnId
 routes.put('/columns/:id', new ColumnController().updateColumn)
 
 routes.delete("/card/:id", new CardController().deleteCard) 
